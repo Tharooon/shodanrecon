@@ -1,69 +1,63 @@
 
+---
+
 # ShodanRecon Suite
 
 **Discover what others missed | Signal > Noise**
 
-A domain-focused Shodan recon suite built for **bug bounty hunters, red teamers, and security researchers** to discover **untouched, high-value subdomains** while eliminating IP and CDN noise.
+ShodanRecon Suite is a lightweight, domain-focused reconnaissance toolkit designed to help bug bounty hunters and security researchers discover **high-value, in-scope subdomains** while eliminating IP and CDN noise.
 
 Built by **Tharooon**.
 
 ---
 
-## ✨ Features
+## Features
 
-* 🎯 Domain-specific Shodan recon
-* 🧠 High-signal query generation
-* 🧩 Favicon hash pivoting (mmh3)
-* 🏗 ASN & Organization enrichment
-* 🛡 CDN noise reduction
-* 📛 Strict domain ownership filtering
-* 📄 Clean outputs (domains only, no IP junk)
+* Domain-specific Shodan reconnaissance
+* High-signal query generation
+* Favicon hash pivoting (mmh3)
+* ASN and Organization enrichment
+* CDN noise reduction
+* Strict domain ownership filtering
+* Clean outputs (domains only, no raw IPs)
 
 ---
 
-## 🧰 Tools Included
+## Tools
 
-### 1️⃣ QueryProGen
+### QueryProGen
 
-**Advanced Shodan query generator**
-
-Generates high-quality, domain-specific Shodan queries using:
+Advanced Shodan query generator that creates domain-specific queries using:
 
 * SSL certificate fields
 * HTTP content markers
-* ASN & Organization discovery (CDN-filtered)
+* ASN and Organization discovery (CDN-filtered)
 * Unique favicon hash extraction
 
-Output is a ready-to-use `queries.txt` file for Shodan hunting.
+Outputs a ready-to-use `queries.txt` file.
 
 ---
 
-### 2️⃣ ShodanRecon
+### ShodanRecon
 
-**Domain-safe Shodan recon engine**
+Domain-safe Shodan reconnaissance engine that:
 
 * Executes all queries from `queries.txt`
 * Extracts hostnames from Shodan results
-* Filters results to include **only in-scope domains**
-* Removes raw IP noise
-* Outputs **unique, verified subdomains**
+* Filters results to include **only target-owned domains**
+* Removes IP-only noise
+* Outputs unique, verified subdomains
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```
 shodanrecon-suite/
 ├── querygen/
-│   ├── queryprogen.py
-│   └── examples/
-│       └── tesla_queries.txt
-│
+│   └── queryprogen.py
 ├── shodanrecon/
-│   ├── shodanrecon.py
-│   └── examples/
-│       └── tesla_domains.txt
-│
+│   └── shodanrecon.py
 ├── requirements.txt
 ├── README.md
 └── LICENSE
@@ -71,7 +65,7 @@ shodanrecon-suite/
 
 ---
 
-## ⚙️ Installation
+## Installation
 
 ```bash
 git clone https://github.com/<your-username>/shodanrecon-suite.git
@@ -81,9 +75,9 @@ pip3 install -r requirements.txt
 
 ---
 
-## 🔑 API Key Setup
+## API Key Setup
 
-This project **never hardcodes API keys**.
+This project does not hardcode API keys.
 
 Set your Shodan API key as an environment variable:
 
@@ -93,22 +87,15 @@ export SHODAN_API_KEY="YOUR_SHODAN_API_KEY"
 
 ---
 
-## 🚀 Usage
+## Usage
 
-### Generate Shodan Queries
+### Generate Queries
 
 ```bash
 python3 querygen/queryprogen.py -d tesla.com -o tesla_queries.txt
 ```
 
-Example output:
-
-```
-asn:AS16625
-org:"Akamai Technologies, Inc."
-http.favicon.hash:-1166125415
-ssl.cert.subject.cn:"tesla.com"
-```
+This generates high-signal Shodan queries tailored specifically to the target domain.
 
 ---
 
@@ -121,23 +108,17 @@ python3 shodanrecon/shodanrecon.py \
   -o tesla_domains.txt
 ```
 
-Example output:
-
-```
-bettertime-stage.tesla.com
-serviceapp.tesla.com
-akamai-apigateway-vehicleextinfogw-prdsvc-st.tesla.com
-```
+Output contains **only domains that belong to the target**, with duplicates and IP noise removed.
 
 ---
 
-## 🔍 Post-Recon Workflow (Recommended)
+## Recommended Post-Recon Workflow
 
 ```bash
 cat tesla_domains.txt | httpx -status-code -title -tech-detect
 ```
 
-Then:
+Then run targeted scans:
 
 ```bash
 cat tesla_domains.txt | nuclei -severity medium,high,critical
@@ -145,28 +126,32 @@ cat tesla_domains.txt | nuclei -severity medium,high,critical
 
 ---
 
-## 🧠 How This Is Different
+## Why This Tool Exists
 
-* ❌ No random IP dumping
-* ❌ No unrelated CDN customers
-* ❌ No bloated queries
-* ✅ Only domains that **belong to your target**
-* ✅ Designed for **real-world bug bounty**
+Most Shodan workflows:
+
+* Mix unrelated IPs
+* Return CDN customers
+* Generate excessive noise
+
+ShodanRecon Suite focuses on:
+
+* Domain ownership validation
+* Signal over volume
+* Real-world bug bounty usability
 
 ---
 
-## ⚠️ Disclaimer
+## Disclaimer
 
 This tool is intended for **authorized security testing only**.
-The author is **not responsible for misuse** or illegal activity.
+The author is not responsible for misuse or illegal activity.
 
 ---
 
-## 📜 License
+## License
 
 MIT License
 © 2026 Tharooon
-
----
 
 
