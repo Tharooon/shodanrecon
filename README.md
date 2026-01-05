@@ -27,6 +27,6 @@ belonging to the target domain.
 ## Installation
 
 ```bash
-git clone https://github.com/<your-username>/shodanrecon-suite.git
+git clone https://github.com/tharooon/shodanrecon-suite.git
 cd shodanrecon-suite
 pip3 install -r requirements.txt
