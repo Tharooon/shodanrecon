@@ -1,7 +1,3 @@
-Perfect — below is a **final, clean, GitHub-ready `README.md` content** you can copy-paste directly.
-This matches **real bug bounty tooling standards** and explains everything clearly without overclaiming.
-
----
 
 # ShodanRecon Suite
 
